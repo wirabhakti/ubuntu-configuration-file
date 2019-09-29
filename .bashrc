@@ -91,6 +91,8 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias clean='sudo apt autoremove && sudo apt autoclean'
+alias update='sudo apt update && sudo apt dist-upgrade'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -130,17 +132,17 @@ export PATH=${PATH}:/home/wira/.atom/packages
 # added by Anaconda3 2018.12 installer
 # >>> conda init >>>
 # !! Contents within this block are managed by 'conda init' !!
-#__conda_setup="$(CONDA_REPORT_ERRORS=false '/home/wira/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
-#if [ $? -eq 0 ]; then
-#    \eval "$__conda_setup"
-#else
-#    if [ -f "/home/wira/anaconda3/etc/profile.d/conda.sh" ]; then
-#        . "/home/wira/anaconda3/etc/profile.d/conda.sh"
-#        CONDA_CHANGEPS1=false conda activate base
-#    else
-#        \export PATH="/home/wira/anaconda3/bin:$PATH"
-#    fi
-#fi
+__conda_setup="$(CONDA_REPORT_ERRORS=false '/home/wira/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    \eval "$__conda_setup"
+else
+    if [ -f "/home/wira/anaconda3/etc/profile.d/conda.sh" ]; then
+# . "/home/wira/anaconda3/etc/profile.d/conda.sh"  # commented out by conda initialize
+        CONDA_CHANGEPS1=false conda activate base
+    else
+        \export PATH="/home/wira/anaconda3/bin:$PATH"
+    fi
+fi
 #unset __conda_setup
 # <<< conda init <<<
 #
@@ -148,3 +150,27 @@ export PYTHONPATH="$PYTHONPATH:/home/wira/.local/lib/python3.6/site-packages"
 export PATH="~/.vim/bin:$PATH"
 export PATH="~/.vimpkg/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
+
+#Path for geckodriver
+export PATH="~/.local/lib/python3.6/site-packages/geckodriver:$PATH"
+
+#change ctrl layout to capslock
+setxkbmap -layout us -option ctrl:nocaps
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/wira/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/wira/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/wira/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/wira/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+export PYTHONPATH='/home/wira/anaconda3/:$PYTHONPATH'
+export EDITOR='/usr/local/bin/vim'
